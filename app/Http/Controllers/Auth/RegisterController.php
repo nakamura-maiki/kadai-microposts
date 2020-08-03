@@ -1,4 +1,5 @@
 <?php
+// ユーザ登録のためのコントローラ
 
 namespace App\Http\Controllers\Auth;
 
