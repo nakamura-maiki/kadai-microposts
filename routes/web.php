@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'MicropostsController@index');
 
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -27,6 +29,9 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
+//認証を必要とするグループ
 Route::group(["middleware" => ["auth"]], function () {
     Route::resource("users", "UsersController", ["only" => ["index", "show"]]);
+    //Micropostsのルーティング
+    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });
